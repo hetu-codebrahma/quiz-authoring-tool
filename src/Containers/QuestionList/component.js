@@ -6,6 +6,13 @@ import './styles.css';
 
 class QuestionList extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      deleteMode: false,
+    }
+  }
+
   addNewQuestion(){
     const { addQuestion, questions, selectQuestion } = this.props;
     const newQuestionNumber = questions.list.length + 1;
@@ -17,12 +24,24 @@ class QuestionList extends Component {
     selectQuestion(question.id);
   }
 
+  deleteQuestion(questionID){
+    this.props.deleteQuestion(questionID);
+  }
+
   selectQuestion(questionID){
     this.props.selectQuestion(questionID);
   }
 
   activateDeleteMode(){
+    this.setState({
+      deleteMode: true,
+    })
+  }
 
+  deactivateDeleteMode(){
+    this.setState({
+      deleteMode: false,
+    })
   }
 
   render(){
@@ -33,27 +52,45 @@ class QuestionList extends Component {
           {
             this.props.questions.list.map(question => {
               return (
-                <QuestionListItem
-                  key={question.id}
-                  question={question}
-                  selected={this.props.selectedQuestion === question.id}
-                  onQuestionClicked={() => this.selectQuestion(question.id)}
-                />
+                <div key={question.id} className="QuestionListItemContainer">
+                  <QuestionListItem
+                    question={question}
+                    selected={this.props.selectedQuestion === question.id}
+                    onQuestionClicked={() => this.selectQuestion(question.id)}
+                  />
+                  {this.state.deleteMode && (
+                    <Button
+                      onClick={() => this.deleteQuestion(question.id)}
+                      label="X"
+                      style={{ backgroundColor: 'white' }}
+                      labelStyle={{ color: 'red' }}
+                    />
+                  )}
+                </div>
               );
             })
           }
         </div>
-        <div className="ButtonsContainer">
-          <Button 
-            onClick={() => this.addNewQuestion()}
-            label="Add"
-          />
-          <Button
-            onClick={() => this.activateDeleteMode()}
-            label="Delete"
-            style={{ backgroundColor: 'crimson' }}
-          />
-        </div>
+        {this.state.deleteMode ? (
+          <div className="ButtonsContainer">
+            <Button 
+              onClick={() => this.deactivateDeleteMode()}
+              label="Done"
+            />
+          </div>
+        ) : (
+          <div className="ButtonsContainer">
+            <Button 
+              onClick={() => this.addNewQuestion()}
+              label="Add"
+            />
+            <Button
+              onClick={() => this.activateDeleteMode()}
+              label="Delete"
+              style={{ backgroundColor: 'crimson' }}
+            />
+          </div>
+        )}
       </div>
     );
   }

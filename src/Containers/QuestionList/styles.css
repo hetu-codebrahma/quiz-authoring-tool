@@ -4,6 +4,13 @@
   padding: 10px;
   flex-direction: column;
 }
+
+.QuestionListItemContainer{
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+}
+
 .ButtonsContainer{
   display: flex;
   align-items: center;

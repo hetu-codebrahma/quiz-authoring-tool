@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addQuestion } from './actions';
+import { addQuestion, deleteQuestion } from './actions';
 import { selectQuestion } from '../QuestionEditor/actions';
 import QuestionList from './component';
 
@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addQuestion: (question) => dispatch(addQuestion(question)),
+  deleteQuestion: (questionID) => dispatch(deleteQuestion(questionID)),
   selectQuestion: (questionID) => dispatch(selectQuestion(questionID)),
 })
 
