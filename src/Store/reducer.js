@@ -1,9 +1,11 @@
 import { 
   ADD_QUESTION,
   DELETE_QUESTION,
+  QUESTION_SELECTED,
 } from "./constants";
 
 const initialState = {
+  selectedQuestion: null,
   list: [],
 }
 
@@ -22,6 +24,12 @@ const reducer = (state = initialState, action) => {
           question.id !== action.payload.questionID
         )
       })
+
+    case QUESTION_SELECTED:
+      // set a question as selected
+      return Object.assign({}, state, {
+        selectedQuestion: action.payload.questionID,
+      });
 
     default:
       return state

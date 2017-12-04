@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
-import { addQuestion, deleteQuestion } from './actions';
-import { selectQuestion } from '../QuestionEditor/actions';
+import { 
+  addQuestion, 
+  deleteQuestion, 
+  selectQuestion,
+} from '../../Store/actions';
 import QuestionList from './component';
 
 const mapStateToProps = (state) => ({
   questions: state.questions,
-  selectedQuestion: state.editor.selectedQuestion,
 });
 
 const mapDispatchToProps = (dispatch) => ({

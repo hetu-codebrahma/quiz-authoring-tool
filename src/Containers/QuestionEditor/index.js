@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import QuestionEditor from './component';
 
 const mapStateToProps = (state) => {
-  const { selectedQuestion } = state.editor;
-  const { list } = state.questions;
+  const { list, selectedQuestion } = state.questions;
   const question = list.filter(ques => ques.id === selectedQuestion)[0]
   return {
     question,

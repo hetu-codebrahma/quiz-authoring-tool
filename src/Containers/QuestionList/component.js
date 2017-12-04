@@ -45,17 +45,18 @@ class QuestionList extends Component {
   }
 
   render(){
+    const { list, selectedQuestion } = this.props.questions;
     return (
       <div className="QuestionList">
         <p>Select your Questions</p>
         <div>
           {
-            this.props.questions.list.map(question => {
+            list.map(question => {
               return (
                 <div key={question.id} className="QuestionListItemContainer">
                   <QuestionListItem
                     question={question}
-                    selected={this.props.selectedQuestion === question.id}
+                    selected={selectedQuestion === question.id}
                     onQuestionClicked={() => this.selectQuestion(question.id)}
                   />
                   {this.state.deleteMode && (
