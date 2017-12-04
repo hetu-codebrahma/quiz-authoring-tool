@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v1';
 import QuestionListItem from '../../Components/QuestionListItem';
+import Button from '../../Components/Button';
 import './styles.css';
 
 class QuestionList extends Component {
@@ -20,8 +21,11 @@ class QuestionList extends Component {
     this.props.selectQuestion(questionID);
   }
 
+  activateDeleteMode(){
+
+  }
+
   render(){
-    console.log(this.props)
     return (
       <div className="QuestionList">
         <p>Select your Questions</p>
@@ -39,11 +43,16 @@ class QuestionList extends Component {
             })
           }
         </div>
-        <div>
-          <button onClick={() => this.addNewQuestion()}>
-            Add
-          </button>
-          <button>Delete</button>
+        <div className="ButtonsContainer">
+          <Button 
+            onClick={() => this.addNewQuestion()}
+            label="Add"
+          />
+          <Button
+            onClick={() => this.activateDeleteMode()}
+            label="Delete"
+            style={{ backgroundColor: 'crimson' }}
+          />
         </div>
       </div>
     );

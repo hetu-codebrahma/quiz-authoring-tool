@@ -2,7 +2,7 @@
   display: flex;
   flex: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 10px;
   border-bottom: 1px #333 solid;
   cursor: pointer;

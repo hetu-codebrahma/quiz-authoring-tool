@@ -4,3 +4,9 @@
   padding: 10px;
   flex-direction: column;
 }
+.ButtonsContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+}
