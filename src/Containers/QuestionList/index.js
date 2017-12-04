@@ -1,12 +1,13 @@
-import React from 'react';
-import './styles.css';
+import { connect } from 'react-redux';
+import { addQuestion } from './actions';
+import QuestionList from './component';
 
-const QuestionList = () => {
-  return (
-    <div className="QuestionList">
-      <p>QuestionList</p>
-    </div>
-  );
-};
+const mapStateToProps = (state) => ({
+  questions: state.questions,
+});
 
-export default QuestionList;
+const mapDispatchToProps = (dispatch) => ({
+  addQuestion: (question) => dispatch(addQuestion(question)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionList);
