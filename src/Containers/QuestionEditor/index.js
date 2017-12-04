@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import QuestionEditor from './component';
+import { updateQuestionValue } from '../../Store/actions';
 
 const mapStateToProps = (state) => {
   const { list, selectedQuestion } = state.questions;
@@ -10,7 +11,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  // addQuestion: (question) => dispatch(addQuestion(question)),
+  updateQuestionValue: (value, questionID) => {
+    return dispatch(updateQuestionValue(value, questionID));
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionEditor);

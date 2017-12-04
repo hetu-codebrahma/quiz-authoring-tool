@@ -2,6 +2,7 @@ import {
   ADD_QUESTION,
   DELETE_QUESTION,
   QUESTION_SELECTED,
+  QUESTION_VALUE_CHANGED,
 } from "./constants";
 
 const initialState = {
@@ -30,6 +31,19 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         selectedQuestion: action.payload.questionID,
       });
+
+    case QUESTION_VALUE_CHANGED:
+      // update the value of the given question
+      return Object.assign({}, state, {
+        list: state.list.map(question => {
+          if(question.id === action.payload.questionID){
+            return Object.assign({}, question, {
+              title: action.payload.value,
+            });
+          }
+          return question;
+        })
+      })
 
     default:
       return state

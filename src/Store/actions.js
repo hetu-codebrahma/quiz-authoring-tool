@@ -2,6 +2,7 @@ import {
   ADD_QUESTION,
   DELETE_QUESTION,
   QUESTION_SELECTED,
+  QUESTION_VALUE_CHANGED,
 } from './constants';
 
 export const addQuestion = (question) => ({
@@ -17,4 +18,9 @@ export const deleteQuestion = (questionID) => ({
 export const selectQuestion = (questionID) => ({
   type: QUESTION_SELECTED,
   payload: { questionID },
+})
+
+export const updateQuestionValue = (value, questionID) => ({
+  type: QUESTION_VALUE_CHANGED,
+  payload: { value, questionID },
 })

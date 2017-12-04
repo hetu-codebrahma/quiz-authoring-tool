@@ -1,0 +1,16 @@
+.TextInput{
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.TextInputLabel{
+  font-size: 20px;
+  flex: 1
+}
+
+.TextInputField{
+  flex: 3;
+}

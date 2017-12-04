@@ -1,7 +1,7 @@
 .QuestionEditor{
   display: flex;
   flex: 8;
-  align-items: center;
-  justify-content: center;
   background-color: rgb(223, 223, 223);
+  padding: 30px;
+  flex-direction: column;
 }
