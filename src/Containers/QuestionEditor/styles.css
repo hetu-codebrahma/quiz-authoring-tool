@@ -1,0 +1,7 @@
+.QuestionEditor{
+  display: flex;
+  flex: 8;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(158, 65, 65);
+}
