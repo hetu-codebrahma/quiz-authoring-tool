@@ -1,12 +1,17 @@
-import React from 'react';
-import './styles.css';
+import { connect } from 'react-redux';
+import QuestionEditor from './component';
 
-const QuestionEditor = () => {
-  return (
-    <div className="QuestionEditor">
-      <p>QuestionEditor</p>    
-    </div>
-  );
+const mapStateToProps = (state) => {
+  const { selectedQuestion } = state.editor;
+  const { list } = state.questions;
+  const question = list.filter(ques => ques.id === selectedQuestion)[0]
+  return {
+    question,
+  }
 };
 
-export default QuestionEditor;
+const mapDispatchToProps = (dispatch) => ({
+  // addQuestion: (question) => dispatch(addQuestion(question)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionEditor);

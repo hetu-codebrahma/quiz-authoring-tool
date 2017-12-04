@@ -1,0 +1,19 @@
+.QuestionListItem{
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-bottom: 1px #333 solid;
+  cursor: pointer;
+}
+
+.QuestionListItem:hover {
+  background-color: rgb(202, 103, 103);
+  color: white;
+}
+
+.SelectedQuestion {
+  background-color: rgb(202, 103, 103);
+  color: white;
+}
