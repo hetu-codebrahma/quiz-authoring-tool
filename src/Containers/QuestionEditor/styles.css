@@ -5,3 +5,15 @@
   padding: 30px;
   flex-direction: column;
 }
+
+.divider {
+  height: 1px;
+  background-color: #333;
+  margin: 20px 0;
+}
+
+.OptionContainer {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+}

@@ -4,6 +4,8 @@ import {
   QUESTION_SELECTED,
   QUESTION_VALUE_CHANGED,
   OPTION_VALUE_CHANGED,
+  ADD_OPTION_TO_QUESTION,
+  DELETE_OPTION_FROM_QUESTION,
 } from "./constants";
 
 const initialState = {
@@ -69,6 +71,36 @@ const reducer = (state = initialState, action) => {
             })
           }
           // else return as is
+          return question;
+        })
+      })
+    }
+
+    case ADD_OPTION_TO_QUESTION: {
+      // Add an option to question
+      const { questionID } = action.payload;
+      return Object.assign({}, state, {
+        list: state.list.map(question => {
+          if(question.id === questionID){
+            return Object.assign({}, question, {
+              options: question.options.concat([`Option`])
+            })
+          }
+          return question;
+        })
+      })
+    }
+
+    case DELETE_OPTION_FROM_QUESTION: {
+      // Remove an option from question
+      const { questionID, optionIndex } = action.payload;
+      return Object.assign({}, state, {
+        list: state.list.map(question => {
+          if(question.id === questionID){
+            return Object.assign({}, question, {
+              options: question.options.filter((option, i) => i !== optionIndex)
+            })
+          }
           return question;
         })
       })

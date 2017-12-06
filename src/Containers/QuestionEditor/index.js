@@ -3,6 +3,8 @@ import QuestionEditor from './component';
 import {
   updateQuestionValue,
   updateOptionValue,
+  addNewOptionToQuestion,
+  deleteOptionOfQuestion,
 } from '../../Store/actions';
 
 const mapStateToProps = (state) => {
@@ -20,6 +22,12 @@ const mapDispatchToProps = (dispatch) => ({
   updateOptionValue: (value, optionIndex, questionID) => {
     return dispatch(updateOptionValue(value, optionIndex, questionID))
   },
+  addNewOptionToQuestion: (questionID) => {
+    return dispatch(addNewOptionToQuestion(questionID))
+  },
+  deleteOptionOfQuestion: (optionIndex, questionID) => {
+    return dispatch(deleteOptionOfQuestion(optionIndex, questionID))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionEditor);
