@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import QuestionEditor from './component';
-import { updateQuestionValue } from '../../Store/actions';
+import {
+  updateQuestionValue,
+  updateOptionValue,
+} from '../../Store/actions';
 
 const mapStateToProps = (state) => {
   const { list, selectedQuestion } = state.questions;
@@ -13,6 +16,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   updateQuestionValue: (value, questionID) => {
     return dispatch(updateQuestionValue(value, questionID));
+  },
+  updateOptionValue: (value, optionIndex, questionID) => {
+    return dispatch(updateOptionValue(value, optionIndex, questionID))
   },
 })
 

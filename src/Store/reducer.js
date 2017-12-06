@@ -1,8 +1,9 @@
-import { 
+import {
   ADD_QUESTION,
   DELETE_QUESTION,
   QUESTION_SELECTED,
   QUESTION_VALUE_CHANGED,
+  OPTION_VALUE_CHANGED,
 } from "./constants";
 
 const initialState = {
@@ -17,11 +18,11 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         list: state.list.concat([action.payload.question])
       });
-    
+
     case DELETE_QUESTION:
       // Delete a question
       return Object.assign({}, state, {
-        list: state.list.filter(question => 
+        list: state.list.filter(question =>
           question.id !== action.payload.questionID
         )
       })
@@ -44,6 +45,34 @@ const reducer = (state = initialState, action) => {
           return question;
         })
       })
+
+    case OPTION_VALUE_CHANGED: {
+      // Update the value of the option in a question
+      const { questionID,  optionIndex, value } = action.payload;
+      return Object.assign({}, state, {
+        // Go through the questions
+        list: state.list.map(question => {
+          // If the question id matches
+          if(question.id === questionID) {
+            // edit the question
+            return Object.assign({}, question, {
+              // go through its options
+              options: question.options.map((option, i) => {
+                // if the option index matches
+                if(i === optionIndex){
+                  // Update the option with the new value
+                  return value;
+                }
+                // else return as is
+                return option;
+              })
+            })
+          }
+          // else return as is
+          return question;
+        })
+      })
+    }
 
     default:
       return state

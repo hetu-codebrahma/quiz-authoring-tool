@@ -19,6 +19,7 @@ class QuestionList extends Component {
     const question = {
       id: uuid(),
       title: `Question ${newQuestionNumber}`,
+      options: ["Option", "Option"],
     };
     addQuestion(question);
     selectQuestion(question.id);
@@ -51,9 +52,10 @@ class QuestionList extends Component {
         <p>Select your Questions</p>
         <div>
           {
-            list.map(question => {
+            list.map((question, i) => {
               return (
                 <div key={question.id} className="QuestionListItemContainer">
+                  <p>{i + 1}.</p>
                   <QuestionListItem
                     question={question}
                     selected={selectedQuestion === question.id}
@@ -74,14 +76,14 @@ class QuestionList extends Component {
         </div>
         {this.state.deleteMode ? (
           <div className="ButtonsContainer">
-            <Button 
+            <Button
               onClick={() => this.deactivateDeleteMode()}
               label="Done"
             />
           </div>
         ) : (
           <div className="ButtonsContainer">
-            <Button 
+            <Button
               onClick={() => this.addNewQuestion()}
               label="Add"
             />

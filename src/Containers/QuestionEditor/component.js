@@ -8,7 +8,12 @@ class QuestionEditor extends Component {
     const { id } = this.props.question;
     this.props.updateQuestionValue(value, id);
   }
-  
+
+  handleOptionValueChange(value, optionIndex){
+    const { id } = this.props.question;
+    this.props.updateOptionValue(value, optionIndex, id);
+  }
+
   render(){
     return (
       <div className="QuestionEditor">
@@ -21,6 +26,19 @@ class QuestionEditor extends Component {
                 value={this.props.question.title}
                 onChange={(value) => this.handleQuestionValueChange(value)}
               />
+              {
+                this.props.question.options.map((option, i) => {
+                  return(
+                    <div>
+                      <TextInput
+                        label={`Option ${i + 1}.`}
+                        value={option}
+                        onChange={(value) => this.handleOptionValueChange(value, i)}
+                      />
+                    </div>
+                  )
+                })
+              }
             </div>
           ) : (
             <div>
