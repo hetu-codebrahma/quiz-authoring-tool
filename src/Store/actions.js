@@ -6,6 +6,7 @@ import {
   OPTION_VALUE_CHANGED,
   ADD_OPTION_TO_QUESTION,
   DELETE_OPTION_FROM_QUESTION,
+  UPDATE_QUESTION_IMAGE,
 } from './constants';
 
 export const addQuestion = (question) => ({
@@ -26,6 +27,11 @@ export const selectQuestion = (questionID) => ({
 export const updateQuestionValue = (value, questionID) => ({
   type: QUESTION_VALUE_CHANGED,
   payload: { value, questionID },
+})
+
+export const updateQuestionImage = (questionID, imageDetails) => ({
+  type: UPDATE_QUESTION_IMAGE,
+  payload: { questionID, imageDetails },
 })
 
 export const updateOptionValue = (value, optionIndex, questionID) => ({

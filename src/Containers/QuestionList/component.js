@@ -19,6 +19,7 @@ class QuestionList extends Component {
     const question = {
       id: uuid(),
       title: `Question ${newQuestionNumber}`,
+      image: null,
       options: ["Option", "Option"],
     };
     addQuestion(question);

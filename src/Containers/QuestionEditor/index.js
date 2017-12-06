@@ -5,6 +5,7 @@ import {
   updateOptionValue,
   addNewOptionToQuestion,
   deleteOptionOfQuestion,
+  updateQuestionImage,
 } from '../../Store/actions';
 
 const mapStateToProps = (state) => {
@@ -27,6 +28,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   deleteOptionOfQuestion: (optionIndex, questionID) => {
     return dispatch(deleteOptionOfQuestion(optionIndex, questionID))
+  },
+  updateQuestionImage: (questionID, imageDetails) => {
+    return dispatch(updateQuestionImage(questionID, imageDetails))
   }
 })
 

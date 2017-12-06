@@ -3,6 +3,7 @@ import {
   DELETE_QUESTION,
   QUESTION_SELECTED,
   QUESTION_VALUE_CHANGED,
+  UPDATE_QUESTION_IMAGE,
   OPTION_VALUE_CHANGED,
   ADD_OPTION_TO_QUESTION,
   DELETE_OPTION_FROM_QUESTION,
@@ -43,6 +44,18 @@ const reducer = (state = initialState, action) => {
             return Object.assign({}, question, {
               title: action.payload.value,
             });
+          }
+          return question;
+        })
+      })
+
+    case UPDATE_QUESTION_IMAGE:
+      return Object.assign({}, state, {
+        list: state.list.map(question => {
+          if(question.id === action.payload.questionID){
+            return Object.assign({}, question, {
+              image: action.payload.imageDetails,
+            })
           }
           return question;
         })

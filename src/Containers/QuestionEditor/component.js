@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import uuid from 'uuid/v1';
 import TextInput from '../../Components/TextInput';
+import ImageInput from '../../Components/ImageInput';
 import Button from '../../Components/Button';
 import './styles.css';
 
@@ -16,6 +18,11 @@ class QuestionEditor extends Component {
   handleQuestionValueChange(value){
     const { id } = this.props.question;
     this.props.updateQuestionValue(value, id);
+  }
+
+  handleImageSelected(imageDetails) {
+    const { id } = this.props.question;
+    this.props.updateQuestionImage(id, imageDetails);
   }
 
   handleOptionValueChange(value, optionIndex){
@@ -66,11 +73,15 @@ class QuestionEditor extends Component {
                 value={this.props.question.title}
                 onChange={(value) => this.handleQuestionValueChange(value)}
               />
+              <ImageInput
+                onImageSelected={imageDetails => this.handleImageSelected(imageDetails)}
+                value={this.props.question.image}
+              />
               <div className="divider"/>
               {
                 this.props.question.options.map((option, i) => {
                   return(
-                    <div key={`option ${1}`} className="OptionContainer" >
+                    <div key={uuid()} className="OptionContainer" >
                       <TextInput
                         label={`Option ${i + 1}.`}
                         value={option}
