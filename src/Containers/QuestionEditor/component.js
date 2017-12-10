@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import uuid from 'uuid/v1';
 import TextInput from '../../Components/TextInput';
 import ImageInput from '../../Components/ImageInput';
 import Button from '../../Components/Button';
@@ -81,7 +80,7 @@ class QuestionEditor extends Component {
               {
                 this.props.question.options.map((option, i) => {
                   return(
-                    <div key={uuid()} className="OptionContainer" >
+                    <div key={`option_${i}`} className="OptionContainer" >
                       <TextInput
                         label={`Option ${i + 1}.`}
                         value={option}
