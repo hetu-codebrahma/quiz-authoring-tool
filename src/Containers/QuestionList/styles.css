@@ -4,7 +4,21 @@
   flex-direction: column;
   background-color: rgb(102, 141, 173);
   color: white;
-  overflow: scroll;  
+  overflow: scroll; 
+  height: 100%;
+}
+
+.QuestionListContainer {
+  flex: 3;
+}
+
+.QuestionListMobileDisplay {
+  display: flex !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .QuestionListItemContainer{
@@ -23,4 +37,25 @@
   align-items: center;
   justify-content: space-around;
   padding: 20px;
+}
+
+.QuestionListButton {
+  display: none;
+}
+
+@media only screen and (max-width: 700px) {
+  .QuestionList {
+    display: none;
+    flex: none;
+  }
+  .QuestionListButton {
+    display: block;
+    position: absolute;
+    top: 15;
+    left: 15;
+  }
+
+  .QuestionListContainer {
+    flex: none;
+  }
 }
