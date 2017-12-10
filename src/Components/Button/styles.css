@@ -3,15 +3,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: steelblue;
-  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 2px;
   padding: 10px 25px; 
+  border: none;
 }
 .Button:hover{
+  box-shadow: 2px 3px 5px rgba(0,0,0,0.3);
+}
+
+.Button:active {
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.8);
   opacity: 0.7;
 }
 
 .ButtonLabel{
   font-size: 17px;
-  color: white;
+  color: #333;
 }

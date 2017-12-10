@@ -50,26 +50,25 @@ class QuestionList extends Component {
     const { list, selectedQuestion } = this.props.questions;
     return (
       <div className="QuestionList">
-        <p>Select your Questions</p>
+        <h3 className="heading">List of questions</h3>
         <div>
           {
             list.map((question, i) => {
               return (
                 <div key={question.id} className="QuestionListItemContainer">
-                  <p>{i + 1}.</p>
+                  {this.state.deleteMode ? (
+                    <Button
+                      onClick={() => this.deleteQuestion(question.id)}
+                      label="X"
+                      labelColor="white"
+                      backgroundColor="#e74c3c"
+                    />
+                  ) : <span className="QuestionIndex">{i + 1}.</span>}
                   <QuestionListItem
                     question={question}
                     selected={selectedQuestion === question.id}
                     onQuestionClicked={() => this.selectQuestion(question.id)}
                   />
-                  {this.state.deleteMode && (
-                    <Button
-                      onClick={() => this.deleteQuestion(question.id)}
-                      label="X"
-                      style={{ backgroundColor: 'white' }}
-                      labelStyle={{ color: 'red' }}
-                    />
-                  )}
                 </div>
               );
             })
@@ -80,6 +79,7 @@ class QuestionList extends Component {
             <Button
               onClick={() => this.deactivateDeleteMode()}
               label="Done"
+              backgroundColor="white"              
             />
           </div>
         ) : (
@@ -87,11 +87,14 @@ class QuestionList extends Component {
             <Button
               onClick={() => this.addNewQuestion()}
               label="Add"
+              backgroundColor="#CDDC39"
+              labelColor="#333"
             />
             <Button
               onClick={() => this.activateDeleteMode()}
               label="Delete"
-              style={{ backgroundColor: 'crimson' }}
+              backgroundColor="crimson"
+              labelColor="white"
             />
           </div>
         )}

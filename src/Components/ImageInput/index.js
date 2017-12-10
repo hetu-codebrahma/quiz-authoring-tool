@@ -48,12 +48,15 @@ class ImageInput extends Component {
             <Button
               onClick={() => this.removeImage()}
               label="Remove Image"
-              style={{ backgroundColor: 'red' }}
+              backgroundColor="crimson"
+              labelColor="white"
             />
           ) : (
             <Button
               onClick={() => this.input.click()}
               label="Add Image"
+              backgroundColor="#CDDC39"
+              labelColor="#333"
             />
           )
         }

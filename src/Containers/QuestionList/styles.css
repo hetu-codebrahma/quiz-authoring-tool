@@ -1,14 +1,21 @@
 .QuestionList{
   display: flex;
   flex: 4;
-  padding: 10px;
   flex-direction: column;
+  background-color: rgb(102, 141, 173);
+  color: white;
+  overflow: scroll;  
 }
 
 .QuestionListItemContainer{
   display: flex;
   align-items: stretch;
   flex-direction: row;
+}
+
+.QuestionIndex {
+  padding: 10px;
+  font-size: 30px;
 }
 
 .ButtonsContainer{

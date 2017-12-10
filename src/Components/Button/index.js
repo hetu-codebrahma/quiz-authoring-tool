@@ -3,15 +3,18 @@ import './styles.css';
 
 const Button = (props) => {
   return (
-    <div
+    <button
       className="Button"
-      style={props.style}
+      style={{backgroundColor: props.backgroundColor}}
       onClick={() => props.onClick()}
     >
-      <span className="ButtonLabel" style={props.labelStyle}>
+      <span 
+        className="ButtonLabel" 
+        style={{color: props.labelColor}}
+      >
         {props.label}
       </span>
-    </div>
+    </button>
   )
 }
 

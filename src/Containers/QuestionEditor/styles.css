@@ -1,9 +1,9 @@
 .QuestionEditor{
   display: flex;
   flex: 8;
-  background-color: rgb(223, 223, 223);
-  padding: 30px;
+  background-color: white;
   flex-direction: column;
+  overflow: scroll;
 }
 
 .divider {

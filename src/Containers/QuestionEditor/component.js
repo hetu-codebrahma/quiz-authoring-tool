@@ -63,7 +63,7 @@ class QuestionEditor extends Component {
   render() {
     return (
       <div className="QuestionEditor">
-        <h3>Edit Question</h3>
+        <h3 className="heading">Edit Question</h3>
         {
           this.props.question ? (
             <div>
@@ -91,8 +91,8 @@ class QuestionEditor extends Component {
                           <Button
                             onClick={() => this.deleteOption(i)}
                             label="X"
-                            style={{ backgroundColor: 'rgb(223, 223, 223)' }}
-                            labelStyle={{ color: 'red' }}
+                            labelColor="white"
+                            backgroundColor="#e74c3c"
                           />
                         )
                       }
@@ -113,11 +113,14 @@ class QuestionEditor extends Component {
                     <Button
                       onClick={() => this.addNewOption()}
                       label="Add"
+                      backgroundColor="#CDDC39"
+                      labelColor="#333"
                     />
                     <Button
                       onClick={() => this.activateDeleteMode()}
                       label="Delete"
-                      style={{ backgroundColor: 'crimson' }}
+                      backgroundColor="crimson"
+                      labelColor="white"
                     />
                   </div>
                 )
@@ -125,7 +128,7 @@ class QuestionEditor extends Component {
             </div>
           ) : (
             <div>
-              <p>Please add/select a question</p>
+              <h4 className="heading">Please add/select a question</h4>
             </div>
           )
         }

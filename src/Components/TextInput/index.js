@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
+import autosize from 'autosize';
 import './styles.css';
 
-const TextInput = (props) => {
-  return (
-    <div className="TextInput">
-      <span className="TextInputLabel">
-        {props.label}
-      </span>
-      <textarea
-        onChange={(e) => props.onChange(e.target.value)}
-        className="TextInputField"
-        value={props.value}
-      />
-    </div>
-  )
+class TextInput extends Component {
+  componentDidMount(){
+    autosize(this.textarea)
+  }
+
+  render() {
+    return (
+      <div className="TextInput">
+        <span className="TextInputLabel">
+          {this.props.label}
+        </span>
+        <textarea
+          ref={component => this.textarea = component}
+          onChange={(e) => this.props.onChange(e.target.value)}
+          className="TextInputField"
+          value={this.props.value}
+        />
+      </div>
+    )
+  }
 }
 
 
