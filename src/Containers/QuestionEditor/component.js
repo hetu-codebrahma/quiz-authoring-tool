@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import uuid from 'uuid/v1';
 import TextInput from '../../Components/TextInput';
 import ImageInput from '../../Components/ImageInput';
+import AlertBox from '../../Components/AlertBox';
 import Button from '../../Components/Button';
 import './styles.css';
 
@@ -12,6 +13,7 @@ class QuestionEditor extends Component {
 
     this.state = {
       deleteMode: false,
+      error: null,
     }
   }
 
@@ -33,7 +35,7 @@ class QuestionEditor extends Component {
     const { options, question } = this.props;
     // Dont allow more than 6 options
     if(options.length > 5) {
-      // Can also show a error banner
+      this.showError('Can not add more than 6 options')
       return
     }
     this.props.addOption(question.id, uuid());
@@ -43,6 +45,7 @@ class QuestionEditor extends Component {
     const { options } = this.props;
     // Dont allow less than 2 options
     if(options.length < 3) {
+      this.showError('Minimum 2 options are needed')
       return
     }
     this.props.deleteOption(optionID);
@@ -60,10 +63,31 @@ class QuestionEditor extends Component {
     })
   }
 
+  showError(error) {
+    // Show error
+    this.setState({
+      error
+    }, () => this.hideError())
+  }
+
+  hideError(){
+    setTimeout(() => {
+      this.setState({
+        error: null
+      })
+    }, 3000)
+  }
+
   render() {
+    console.log(this.state)
     return (
       <div className="QuestionEditor">
         <h3 className="heading">Edit Question</h3>
+        {
+          this.state.error && (
+            <AlertBox value={this.state.error} />
+          )
+        }
         {
           this.props.question ? (
             <div>
