@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid/v1';
 import TextInput from '../../Components/TextInput';
 import ImageInput from '../../Components/ImageInput';
 import Button from '../../Components/Button';
@@ -24,28 +25,27 @@ class QuestionEditor extends Component {
     this.props.updateQuestionImage(id, imageDetails);
   }
 
-  handleOptionValueChange(value, optionIndex){
-    const { id } = this.props.question;
-    this.props.updateOptionValue(value, optionIndex, id);
+  handleOptionValueChange(value, optionID){
+    this.props.updateOptionValue(value, optionID);
   }
 
   addNewOption() {
-    const { id, options } = this.props.question;
+    const { options, question } = this.props;
     // Dont allow more than 6 options
     if(options.length > 5) {
       // Can also show a error banner
       return
     }
-    this.props.addNewOptionToQuestion(id);
+    this.props.addOption(question.id, uuid());
   }
 
-  deleteOption(optionIndex) {
-    const { id, options } = this.props.question;
+  deleteOption(optionID) {
+    const { options } = this.props;
     // Dont allow less than 2 options
     if(options.length < 3) {
       return
     }
-    this.props.deleteOptionOfQuestion(optionIndex, id);
+    this.props.deleteOption(optionID);
   }
 
   activateDeleteMode() {
@@ -69,7 +69,7 @@ class QuestionEditor extends Component {
             <div>
               <TextInput
                 label="Question"
-                value={this.props.question.title}
+                value={this.props.question.value}
                 onChange={(value) => this.handleQuestionValueChange(value)}
               />
               <ImageInput
@@ -78,18 +78,18 @@ class QuestionEditor extends Component {
               />
               <div className="divider"/>
               {
-                this.props.question.options.map((option, i) => {
+                this.props.options.map((option, i) => {
                   return(
-                    <div key={`option_${i}`} className="OptionContainer" >
+                    <div key={option.id} className="OptionContainer" >
                       <TextInput
                         label={`Option ${i + 1}.`}
-                        value={option}
-                        onChange={(value) => this.handleOptionValueChange(value, i)}
+                        value={option.value}
+                        onChange={(value) => this.handleOptionValueChange(value, option.id)}
                       />
                       {
                         this.state.deleteMode && (
                           <Button
-                            onClick={() => this.deleteOption(i)}
+                            onClick={() => this.deleteOption(option.id)}
                             label="X"
                             labelColor="white"
                             backgroundColor="#e74c3c"

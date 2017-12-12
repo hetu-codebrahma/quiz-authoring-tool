@@ -1,12 +1,12 @@
 import {
   ADD_QUESTION,
   DELETE_QUESTION,
-  QUESTION_SELECTED,
-  QUESTION_VALUE_CHANGED,
-  OPTION_VALUE_CHANGED,
-  ADD_OPTION_TO_QUESTION,
-  DELETE_OPTION_FROM_QUESTION,
+  SELECT_QUESTION,
+  UPDATE_QUESTION_VALUE,
   UPDATE_QUESTION_IMAGE,
+  UPDATE_OPTION_VALUE,
+  ADD_OPTION,
+  DELETE_OPTION,
 } from './constants';
 
 export const addQuestion = (question) => ({
@@ -20,12 +20,12 @@ export const deleteQuestion = (questionID) => ({
 })
 
 export const selectQuestion = (questionID) => ({
-  type: QUESTION_SELECTED,
+  type: SELECT_QUESTION,
   payload: { questionID },
 })
 
 export const updateQuestionValue = (value, questionID) => ({
-  type: QUESTION_VALUE_CHANGED,
+  type: UPDATE_QUESTION_VALUE,
   payload: { value, questionID },
 })
 
@@ -34,17 +34,17 @@ export const updateQuestionImage = (questionID, imageDetails) => ({
   payload: { questionID, imageDetails },
 })
 
-export const updateOptionValue = (value, optionIndex, questionID) => ({
-  type: OPTION_VALUE_CHANGED,
-  payload: { value, optionIndex, questionID }
+export const updateOptionValue = (value, optionID) => ({
+  type: UPDATE_OPTION_VALUE,
+  payload: { value, optionID },
 })
 
-export const addNewOptionToQuestion = (questionID) => ({
-  type: ADD_OPTION_TO_QUESTION,
-  payload: { questionID },
+export const addOption = (questionID, optionID) => ({
+  type: ADD_OPTION,
+  payload: { questionID, optionID },
 })
 
-export const deleteOptionOfQuestion = (optionIndex, questionID) => ({
-  type: DELETE_OPTION_FROM_QUESTION,
-  payload: { optionIndex, questionID },
+export const deleteOption = (optionID) => ({
+  type: DELETE_OPTION,
+  payload: { optionID },
 })

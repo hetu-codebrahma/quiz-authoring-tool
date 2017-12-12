@@ -1,48 +1,66 @@
 import {
   ADD_QUESTION,
   DELETE_QUESTION,
-  QUESTION_SELECTED,
-  QUESTION_VALUE_CHANGED,
+  SELECT_QUESTION,
+  UPDATE_QUESTION_VALUE,
   UPDATE_QUESTION_IMAGE,
-  OPTION_VALUE_CHANGED,
-  ADD_OPTION_TO_QUESTION,
-  DELETE_OPTION_FROM_QUESTION,
+  UPDATE_OPTION_VALUE,
+  ADD_OPTION,
+  DELETE_OPTION,
 } from "./constants";
 
 const initialState = {
-  selectedQuestion: null,
-  list: [],
+  selectedQuestionID: null,
+  questions: [],
+  options: [],
 }
+
+/*
+Data Structure
+
+question: {
+  id: string,
+  value: string,
+  image: Base64 Image string | null,
+}
+
+option: {
+  id: string,
+  questionID: string,
+  value: string,
+}
+
+*/
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_QUESTION:
       // Add a new question
       return Object.assign({}, state, {
-        list: state.list.concat([action.payload.question])
+        questions: state.questions.concat([action.payload.question])
       });
 
     case DELETE_QUESTION:
       // Delete a question
       return Object.assign({}, state, {
-        list: state.list.filter(question =>
+        questions: state.questions.filter(question =>
           question.id !== action.payload.questionID
         )
       })
 
-    case QUESTION_SELECTED:
+    case SELECT_QUESTION:
       // set a question as selected
       return Object.assign({}, state, {
-        selectedQuestion: action.payload.questionID,
+        selectedQuestionID: action.payload.questionID,
       });
 
-    case QUESTION_VALUE_CHANGED:
+    case UPDATE_QUESTION_VALUE:
       // update the value of the given question
       return Object.assign({}, state, {
-        list: state.list.map(question => {
+        questions: state.questions.map(question => {
           if(question.id === action.payload.questionID){
             return Object.assign({}, question, {
-              title: action.payload.value,
+              value: action.payload.value,
             });
           }
           return question;
@@ -51,7 +69,7 @@ const reducer = (state = initialState, action) => {
 
     case UPDATE_QUESTION_IMAGE:
       return Object.assign({}, state, {
-        list: state.list.map(question => {
+        questions: state.questions.map(question => {
           if(question.id === action.payload.questionID){
             return Object.assign({}, question, {
               image: action.payload.imageDetails,
@@ -61,60 +79,32 @@ const reducer = (state = initialState, action) => {
         })
       })
 
-    case OPTION_VALUE_CHANGED: {
-      // Update the value of the option in a question
-      const { questionID,  optionIndex, value } = action.payload;
+    case ADD_OPTION: {
+      const { questionID, optionID } = action.payload;
       return Object.assign({}, state, {
-        // Go through the questions
-        list: state.list.map(question => {
-          // If the question id matches
-          if(question.id === questionID) {
-            // edit the question
-            return Object.assign({}, question, {
-              // go through its options
-              options: question.options.map((option, i) => {
-                // if the option index matches
-                if(i === optionIndex){
-                  // Update the option with the new value
-                  return value;
-                }
-                // else return as is
-                return option;
-              })
-            })
-          }
-          // else return as is
-          return question;
-        })
+        options: state.options.concat([{
+          id: optionID,
+          value: 'Option',
+          questionID,
+        }])
       })
     }
 
-    case ADD_OPTION_TO_QUESTION: {
-      // Add an option to question
-      const { questionID } = action.payload;
+    case DELETE_OPTION: {
+      const { optionID } = action.payload;
       return Object.assign({}, state, {
-        list: state.list.map(question => {
-          if(question.id === questionID){
-            return Object.assign({}, question, {
-              options: question.options.concat([`Option`])
-            })
-          }
-          return question;
-        })
+        options: state.options.filter(option => option.id !== optionID)
       })
     }
 
-    case DELETE_OPTION_FROM_QUESTION: {
-      // Remove an option from question
-      const { questionID, optionIndex } = action.payload;
+    case UPDATE_OPTION_VALUE: {
+      const { optionID, value } = action.payload;
       return Object.assign({}, state, {
-        list: state.list.map(question => {
-          if(question.id === questionID){
-            return Object.assign({}, question, {
-              options: question.options.filter((option, i) => i !== optionIndex)
-            })
+        options: state.options.map(option => {
+          if(option.id === optionID) {
+            return Object.assign({}, option, { value })
           }
-          return question;
+          return option;
         })
       })
     }

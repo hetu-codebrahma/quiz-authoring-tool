@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v1';
-import QuestionListItem from '../../Components/QuestionListItem';
+import ListItem from '../../Components/ListItem';
 import Button from '../../Components/Button';
 import './styles.css';
 
@@ -15,16 +15,24 @@ class QuestionList extends Component {
   }
 
   addNewQuestion(){
-    const { addQuestion, questions, selectQuestion } = this.props;
-    const newQuestionNumber = questions.list.length + 1;
+    const {
+      addQuestion,
+      questions,
+      selectQuestion,
+      addOption,
+    } = this.props;
+    const newQuestionNumber = questions.length + 1;
     const question = {
       id: uuid(),
-      title: `Question ${newQuestionNumber}`,
+      value: `Question ${newQuestionNumber}`,
       image: null,
-      options: ["Option", "Option"],
     };
     addQuestion(question);
+    // Every question needs a minimum of 2 questions
+    addOption(question.id, uuid());
+    addOption(question.id, uuid());
     selectQuestion(question.id);
+
   }
 
   deleteQuestion(questionID){
@@ -60,35 +68,35 @@ class QuestionList extends Component {
   }
 
   render(){
-    const { list, selectedQuestion } = this.props.questions;
+    const { questions, selectedQuestionID } = this.props;
     const { showList } = this.state;
     let QuestionListClasses = 'QuestionList';
     if(showList){
       QuestionListClasses = QuestionListClasses + ' QuestionListMobileDisplay'
     }
-     
+
     return (
       <div className="QuestionListContainer">
         <div className="QuestionListButton">
           {!showList && (
-            <Button 
+            <Button
               label={<i className="material-icons">menu</i>}
               onClick={() => this.onShowListButtonClicked()}
-            />  
+            />
           )}
         </div>
         <div className={QuestionListClasses}>
-          <div className="QuestionListButton">    
-            <Button 
+          <div className="QuestionListButton">
+            <Button
               label={<i className="material-icons">close</i>}
               onClick={() => this.onHideListButtonClicked()}
               labelColor="white"
-            />  
+            />
           </div>
           <h3 className="heading">List of questions</h3>
           <div>
             {
-              list.map((question, i) => {
+              questions.map((question, i) => {
                 return (
                   <div key={question.id} className="QuestionListItemContainer">
                     {this.state.deleteMode ? (
@@ -99,10 +107,10 @@ class QuestionList extends Component {
                         backgroundColor="#e74c3c"
                       />
                     ) : <span className="QuestionIndex">{i + 1}.</span>}
-                    <QuestionListItem
-                      question={question}
-                      selected={selectedQuestion === question.id}
-                      onQuestionClicked={() => this.selectQuestion(question.id)}
+                    <ListItem
+                      value={question.value}
+                      selected={selectedQuestionID === question.id}
+                      onItemClicked={() => this.selectQuestion(question.id)}
                     />
                   </div>
                 );
@@ -114,7 +122,7 @@ class QuestionList extends Component {
               <Button
                 onClick={() => this.deactivateDeleteMode()}
                 label="Done"
-                backgroundColor="white"              
+                backgroundColor="white"
               />
             </div>
           ) : (

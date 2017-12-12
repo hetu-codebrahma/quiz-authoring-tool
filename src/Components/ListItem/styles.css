@@ -1,4 +1,4 @@
-.QuestionListItem{
+.ListItem{
   display: flex;
   flex: 1;
   align-items: center;
@@ -8,13 +8,12 @@
   cursor: pointer;
 }
 
-.QuestionListItem:hover {
+.ListItem:hover {
   background-color: rgba(243, 243, 243, 0.7);
   color: black;
 }
 
-.SelectedQuestion {
+.SelectedListItem {
   background-color: rgb(255, 255, 255);  
-
   color: black;
 }
